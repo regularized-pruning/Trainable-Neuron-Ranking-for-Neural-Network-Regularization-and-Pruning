@@ -1,0 +1,10 @@
+epochs: 50
+prune_start_epoch: 0
+batch_size: 128
+tau: 10
+final_pruning: 0.9995
+model_architecture: 'efficientnet'
+eps_init: 0.25
+pruning_type: 'regularized'
+prune_schedule: 'exponential'
+test_type: 'pruning_type'
