@@ -34,7 +34,6 @@ class MyLinearLayer(nn.Module):
                     disturbed_bs = None
                 y_d = F.linear(x, disturbed_ws, disturbed_bs)
 
-                # ratio = torch.nan_to_num(torch.div(y,y_d) , nan=10.0, posinf=10.0, neginf = -10.0) + torch.nan_to_num(torch.div(y_d,y) , nan=10.0, posinf=10.0, neginf = -10.0)
                 ratio = torch.nan_to_num(torch.div(y,y_d) , nan=10.0, posinf=10.0, neginf = -10.0)
                 ratio = torch.abs(ratio) 
                 if len(ratio.shape) == 4:

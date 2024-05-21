@@ -32,7 +32,7 @@ train_loss_vs_epoch = []
 test_loss_vs_epoch = []
 
 
-# with open(os.getcwd() + "/reg_pyt_src/parameters.yaml", "r") as yaml_file:
+
 with open(os.getcwd() + "/parameters.yaml", "r") as yaml_file:
     all_parameters = yaml.safe_load(yaml_file)
 
@@ -103,40 +103,39 @@ else:
 
 
 
-# Download and load the CIFAR-10 dataset with the upsampled transformation
+
 train_dataset = datasets.CIFAR10(
     root='data',
     train=True,
-    transform=upsample_transform_train,  # Apply the upsample transformation
+    transform=upsample_transform_train,  
     download=True
 )
 
-# Create a DataLoader for batch processing
+
 
 train_dataloader = torch.utils.data.DataLoader(
     dataset=train_dataset,
     batch_size=batch_size,
     shuffle=True,
-    num_workers=4  # Number of CPU cores to use for data loading
+    num_workers=4  
 )
 
 
 
-# Download and load the CIFAR-10 dataset with the upsampled transformation
+
 test_dataset = datasets.CIFAR10(
     root='data',
     train=False,
-    transform=upsample_transform_test,  # Apply the upsample transformation
+    transform=upsample_transform_test,  
     download=True
 )
 
-# Create a DataLoader for batch processing
 
 test_dataloader = torch.utils.data.DataLoader(
     dataset=test_dataset,
     batch_size=batch_size,
     shuffle=True,
-    num_workers=4  # Number of CPU cores to use for data loading
+    num_workers=4 
 )
 
 
@@ -148,7 +147,6 @@ for X, y in test_dataloader:
     break
 
 
-# Get cpu, gpu or mps device for training.
 device = (
     "cuda"
     if torch.cuda.is_available()
@@ -345,11 +343,6 @@ with open((result_dir + '_' + test_id + '_train_loss_vs_epoch.txt'), 'w') as fil
 with open((result_dir + '_' + test_id + '_test_loss_vs_epoch.txt'), 'w') as file:
     for e in test_loss_vs_epoch:
         file.write("%f\n" % e)
-
-
-
-torch.save(model.state_dict(), model_architecture +'_pruned_model.pth')
-print("Saved PyTorch Model State to model.pth")
 
 
 model.eval()
